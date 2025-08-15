@@ -80,8 +80,6 @@ Before you begin, ensure you have the following:
 4.  **Deploy:**
     *   Once all settings and environment variables are configured, click "Deploy".
 
-Vercel will now build and deploy your application. You can monitor the deployment progress in the Vercel dashboard.
-
 ## Post-Deployment
 
 *   After successful deployment, Vercel will provide you with a unique URL for your application.
