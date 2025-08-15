@@ -17,6 +17,7 @@ export default function PostLoginOptionsPage() {
   const { toast } = useToast();
   const [guestName, setGuestName] = useState<string | null>(null);
   const [cameraActive, setCameraActive] = useState(false);
+  const [cameraFacingMode, setCameraFacingMode] = useState<'user' | 'environment'>('user');
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -42,7 +43,7 @@ export default function PostLoginOptionsPage() {
 
     const setupCamera = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: cameraFacingMode } });
         streamRef.current = stream;
         videoElement.srcObject = stream;
         await videoElement.play();
@@ -67,7 +68,7 @@ export default function PostLoginOptionsPage() {
         console.log("Camera cleaned up on unmount.");
       }
     };
-  }, [cameraActive]);
+  }, [cameraActive, cameraFacingMode]);
 
   const startCamera = () => {
     setCapturedImage(null);
@@ -197,7 +198,17 @@ export default function PostLoginOptionsPage() {
 
             {cameraActive && (
               <div className="space-y-4">
-                <video ref={videoRef} className="w-full rounded-lg shadow-md border-4 border-red-500" autoPlay playsInline></video>
+                <div className="relative">
+                  <video ref={videoRef} className="w-full rounded-lg shadow-md border-4 border-red-500" autoPlay playsInline></video>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="absolute top-2 right-2 rounded-full bg-white/70 backdrop-blur-sm"
+                    onClick={() => setCameraFacingMode(prev => prev === 'user' ? 'environment' : 'user')}
+                  >
+                    <Camera className="h-5 w-5" />
+                  </Button>
+                </div>
                 <canvas ref={canvasRef} className="hidden"></canvas>
                 <div className="flex justify-center gap-4">
                   <Button className="py-6 text-lg flex-1" onClick={capturePhoto}>
