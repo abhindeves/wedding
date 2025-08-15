@@ -19,6 +19,7 @@ export default function PostLoginOptionsPage() {
   const [cameraActive, setCameraActive] = useState(false);
   const [cameraFacingMode, setCameraFacingMode] = useState<'user' | 'environment'>('user');
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
+  const [capturedImageFacingMode, setCapturedImageFacingMode] = useState<'user' | 'environment' | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -93,6 +94,8 @@ export default function PostLoginOptionsPage() {
         context.drawImage(videoRef.current, 0, 0, videoRef.current.videoWidth, videoRef.current.videoHeight);
         const imageDataUrl = canvasRef.current.toDataURL('image/png');
         setCapturedImage(imageDataUrl);
+        setCapturedImageFacingMode(cameraFacingMode);
+        stopCamera(); // Stop camera and set cameraActive to false
         console.log("Photo captured. Captured image data URL length:", imageDataUrl.length);
         console.log("Captured image state after setCapturedImage:", imageDataUrl.substring(0, 100) + "...");
         if (!imageDataUrl || imageDataUrl.length < 100) {
@@ -199,7 +202,7 @@ export default function PostLoginOptionsPage() {
             {cameraActive && (
               <div className="space-y-4">
                 <div className="relative">
-                  <video ref={videoRef} className="w-full rounded-lg shadow-md border-4 border-red-500" autoPlay playsInline></video>
+                  <video ref={videoRef} className={`w-full rounded-lg shadow-md border-4 border-red-500 ${cameraFacingMode === 'user' ? 'scale-x-[-1]' : ''}`} autoPlay playsInline></video>
                   <Button
                     variant="outline"
                     size="icon"
@@ -225,14 +228,14 @@ export default function PostLoginOptionsPage() {
 
             {capturedImage && !isUploading && (
               <div className="space-y-4">
-                <img src={capturedImage} alt="Captured" className="w-full rounded-lg shadow-md" />
+                <img src={capturedImage} alt="Captured" className={`w-full rounded-lg shadow-md ${capturedImageFacingMode === 'user' ? 'scale-x-[-1]' : ''}`} />
                 <div className="flex justify-center gap-4">
                   <Button className="py-6 text-lg flex-1" onClick={handleUpload} disabled={isUploading}>
                     {isUploading && <Loader2 className="mr-2 h-6 w-6 animate-spin" />}
                     <UploadCloud className="mr-2 h-6 w-6" />
                     Upload Photo
                   </Button>
-                  <Button variant="outline" className="py-6 text-lg flex-1" onClick={() => setCapturedImage(null)}>
+                  <Button variant="outline" className="py-6 text-lg flex-1" onClick={() => { setCapturedImage(null); setCameraActive(true); setCapturedImageFacingMode(null); }}>
                     <X className="mr-2 h-6 w-6" />
                     Retake
                   </Button>
