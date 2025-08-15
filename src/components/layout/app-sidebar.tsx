@@ -24,7 +24,7 @@ const navItems = [
   { href: "/schedule", label: "Event Schedule", icon: CalendarDays },
 ];
 
-export default function AppSidebar() {
+export default function AppSidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const [guestName, setGuestName] = useState<string | null>(null);
@@ -38,6 +38,7 @@ export default function AppSidebar() {
   const handleLogout = () => {
     logout();
     router.push("/login");
+    onClose?.(); // Close sidebar on logout
   };
 
   const filteredNavItems = userIsAdmin
@@ -45,7 +46,7 @@ export default function AppSidebar() {
     : navItems;
 
   return (
-    <aside className="hidden md:flex flex-col w-64 bg-card border-r p-4 space-y-4">
+    <aside className="flex flex-col w-64 bg-card border-r p-4 space-y-4 h-full">
       <div className="flex items-center space-x-2 p-2">
         <Gem className="h-8 w-8 text-primary" />
         <h1 className="text-2xl font-headline font-bold">Forever Captured</h1>
@@ -54,7 +55,7 @@ export default function AppSidebar() {
         {filteredNavItems.map((item) => {
           const isActive = pathname === item.href;
           return (
-            <Link href={item.href} key={item.label}>
+            <Link href={item.href} key={item.label} onClick={onClose}>
               <Button
                 variant={isActive ? "secondary" : "ghost"}
                 className="w-full justify-start"
