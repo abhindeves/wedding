@@ -39,7 +39,7 @@ export default function HomePage() {
     <div className="flex flex-col h-full">
       <div className="relative h-[40vh] bg-gray-300">
         <Image 
-          src="https://placehold.co/1600x600/E2D8C5/4B553A?text="
+          src="https://firebasestorage.googleapis.com/v0/b/lions-74edb.firebasestorage.app/o/photos%2F20240818_115754.jpg?alt=media&token=9f0a72bb-be58-48f3-a0a0-7ebe0cb5a065"
           alt="Wedding banner"
           layout="fill"
           objectFit="cover"

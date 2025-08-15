@@ -13,14 +13,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -141,62 +140,70 @@ export default function GalleryPage() {
       </div>
 
       <div className="mb-8 flex justify-end">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+          <Sheet>
+            <SheetTrigger asChild>
               <Button variant="outline">
                 <Filter className="h-4 w-4 mr-2" />
                 Filter & Sort
                 <ChevronDown className="h-4 w-4 ml-2" />
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end">
-              <DropdownMenuLabel>Sort by Date</DropdownMenuLabel>
-              <DropdownMenuGroup>
-                <div className="px-2 py-1">
-                    <Select
-                        onValueChange={(value: SortOrder) => setSortOrder(value)}
-                        value={sortOrder}
-                    >
-                        <SelectTrigger>
-                            <SelectValue placeholder="Sort by date" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="newest">Newest First</SelectItem>
-                            <SelectItem value="oldest">Oldest First</SelectItem>
-                        </SelectContent>
-                    </Select>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full sm:max-w-sm flex flex-col">
+              <SheetHeader>
+                <SheetTitle>Filter & Sort Photos</SheetTitle>
+                <SheetDescription>
+                  Adjust your viewing preferences for the photo gallery.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="flex-1 flex flex-col space-y-6 py-4">
+                <div className="space-y-2">
+                  <Label htmlFor="sortOrder" className="text-base">Sort by Date</Label>
+                  <Select
+                      onValueChange={(value: SortOrder) => setSortOrder(value)}
+                      value={sortOrder}
+                  >
+                      <SelectTrigger id="sortOrder">
+                          <SelectValue placeholder="Sort by date" />
+                      </SelectTrigger>
+                      <SelectContent>
+                          <SelectItem value="newest">Newest First</SelectItem>
+                          <SelectItem value="oldest">Oldest First</SelectItem>
+                      </SelectContent>
+                  </Select>
                 </div>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuLabel>Filter by Uploader</DropdownMenuLabel>
-              <DropdownMenuGroup>
-                 <div className="px-2 py-1">
-                    <Select
-                        onValueChange={(value) => setSelectedUploader(value === "all" ? null : value)}
-                        value={selectedUploader || "all"}
-                    >
-                        <SelectTrigger>
-                            <SelectValue placeholder="All Uploaders" />
-                        </SelectTrigger>
-                        <SelectContent>
-                        <SelectItem value="all">All Uploaders</SelectItem>
-                        {uniqueUploaders.map((uploader) => (
-                            <SelectItem key={uploader} value={uploader}>
-                            {uploader}
-                            </SelectItem>
-                        ))}
-                        </SelectContent>
-                    </Select>
-                 </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="uploaderFilter" className="text-base">Filter by Uploader</Label>
+                  <Select
+                      onValueChange={(value) => setSelectedUploader(value === "all" ? null : value)}
+                      value={selectedUploader || "all"}
+                  >
+                      <SelectTrigger id="uploaderFilter">
+                          <SelectValue placeholder="All Uploaders" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="all">All Uploaders</SelectItem>
+                      {uniqueUploaders.map((uploader) => (
+                          <SelectItem key={uploader} value={uploader}>
+                          {uploader}
+                          </SelectItem>
+                      ))}
+                      </SelectContent>
+                  </Select>
+                </div>
+
                 {areFiltersActive && (
-                    <DropdownMenuItem onClick={clearFilters} className="text-red-500 focus:bg-red-50 focus:text-red-600">
-                        <X className="mr-2 h-4 w-4" />
-                        Clear Filter
-                    </DropdownMenuItem>
+                  <Button variant="outline" onClick={clearFilters} className="w-full">
+                      <X className="mr-2 h-4 w-4" />
+                      Clear Filter
+                  </Button>
                 )}
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </div>
+              <div className="mt-auto">
+                <Button className="w-full" onClick={() => { /* Close sheet */ }}>Apply Filters</Button>
+              </div>
+            </SheetContent>
+          </Sheet>
       </div>
 
       <PhotoGrid key={filteredAndSortedPhotos.length} photos={filteredAndSortedPhotos} onLike={handleLike} onDelete={handleDelete} userId={currentUserId} />
