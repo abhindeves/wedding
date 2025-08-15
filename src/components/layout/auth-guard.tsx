@@ -18,6 +18,16 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
         return;
       }
 
+      // If authenticated and on the login page, redirect to post-login options or home
+      if (pathname === "/login" || pathname === "/admin-login") {
+        if (isAdmin()) {
+          router.replace("/admin/schedule");
+        } else {
+          router.replace("/post-login-options");
+        }
+        return;
+      }
+
       // Check for admin routes
       if (pathname.startsWith("/admin")) {
         if (!isAdmin()) {

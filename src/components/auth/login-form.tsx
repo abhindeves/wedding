@@ -23,9 +23,7 @@ import { Loader2 } from "lucide-react";
 const SITE_PASSWORD = "password123";
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Your name must be at least 2 characters.",
-  }),
+  name: z.literal("Admin", { message: "Username must be Admin." }),
   password: z.string().min(1, {
     message: "Password is required.",
   }),
@@ -39,7 +37,7 @@ export function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: "Admin",
       password: "",
     },
   });
@@ -54,11 +52,7 @@ export function LoginForm() {
               title: `Welcome, ${values.name}!`,
               description: "You're now logged in.",
             });
-            if (values.name === "Admin") {
-                router.push("/admin/schedule");
-            } else {
-                router.push("/");
-            }
+            router.push("/admin/schedule");
           } else {
             toast({
               variant: "destructive",
@@ -80,9 +74,9 @@ export function LoginForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your Name</FormLabel>
+              <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="e.g. Aunt Carol" {...field} />
+                <Input {...field} disabled />
               </FormControl>
               <FormMessage />
             </FormItem>
