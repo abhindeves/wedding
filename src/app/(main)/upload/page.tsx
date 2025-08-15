@@ -12,7 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
-import { UploadCloud, X } from 'lucide-react';
+import { UploadCloud, X, Camera } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import { cn } from "@/lib/utils";
 import { getGuestName } from '@/lib/auth';
@@ -146,6 +146,18 @@ export default function UploadPage() {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <DropzoneField form={form} />
+
+              <div className="flex items-center justify-center space-x-2">
+                <hr className="flex-grow border-t border-gray-300" />
+                <span className="text-muted-foreground">OR</span>
+                <hr className="flex-grow border-t border-gray-300" />
+              </div>
+
+              <Button type="button" className="w-full" onClick={() => router.push('/post-login-options')}>
+                <Camera className="mr-2 h-6 w-6" />
+                Take Photo with Camera
+              </Button>
+
               <Button type="submit" disabled={isUploading} className="w-full">
                 {isUploading ? 'Uploading...' : 'Upload'}
               </Button>
