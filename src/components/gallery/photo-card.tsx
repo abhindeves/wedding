@@ -2,7 +2,7 @@
 
 import type { Photo } from "@/lib/placeholder-data";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, Download, User, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
@@ -11,6 +11,7 @@ import { formatDistanceToNow } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { isAdmin } from "@/lib/auth";
 
 type PhotoCardProps = {
   photo: Photo;
@@ -21,6 +22,11 @@ type PhotoCardProps = {
 
 export default function PhotoCard({ photo, onLike, onDelete, userId }: PhotoCardProps) {
   const { toast } = useToast();
+  const [admin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    setAdmin(isAdmin());
+  }, []);
 
   const isLiked = photo.likedBy.includes(userId);
 
@@ -93,10 +99,10 @@ export default function PhotoCard({ photo, onLike, onDelete, userId }: PhotoCard
                     <span className="sr-only">Like</span>
                 </Button>
                 <span className="text-sm text-muted-foreground min-w-[2ch] text-left">{photo.likes}</span>
-                <Button variant="ghost" size="icon" onClick={handleDownload} className="group">
+                {admin && <Button variant="ghost" size="icon" onClick={handleDownload} className="group">
                     <Download className="h-5 w-5 text-muted-foreground group-hover:text-primary" />
                     <span className="sr-only">Download</span>
-                </Button>
+                </Button>}
                 {(photo.uploader === userId || userId === "Admin") && (
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
