@@ -1,12 +1,13 @@
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Camera, CalendarDays, Sun, Moon, Sparkles, GlassWater } from "lucide-react";
+import { Camera, CalendarDays, Sun, Moon, Sparkles, GlassWater, Settings } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { Loader2 } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const iconMap: { [key: string]: React.ElementType } = {
   Sun: Sun,
@@ -47,6 +48,20 @@ export default function HomePage() {
           data-ai-hint="wedding banner"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+        <div className="absolute top-4 right-4 z-10">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Settings className="h-5 w-5 text-foreground" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem asChild>
+                <Link href="/admin-login">Admin Login</Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
         <div className="absolute inset-0 flex items-end p-8 md:p-12">
             <div className="text-foreground">
                 <h1 className="font-headline text-5xl md:text-7xl font-bold">Celebrating Us</h1>

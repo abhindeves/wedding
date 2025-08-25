@@ -76,9 +76,6 @@ export default function LoginPage() {
               </form>
             </Form>
             <div className="mt-4 text-center text-sm">
-              <Link href="/admin-login" className="text-primary hover:underline">
-                Admin Login
-              </Link>
             </div>
           </CardContent>
         </Card>
