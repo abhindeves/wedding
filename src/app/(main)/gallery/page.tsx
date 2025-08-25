@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
@@ -32,6 +31,7 @@ export default function GalleryPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedUploader, setSelectedUploader] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   const currentUserId = getGuestName() || "anonymous"; // Get the current user's ID
 
   useEffect(() => {
@@ -140,7 +140,7 @@ export default function GalleryPage() {
       </div>
 
       <div className="mb-8 flex justify-end">
-          <Sheet>
+          <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
             <SheetTrigger asChild>
               <Button variant="outline">
                 <Filter className="h-4 w-4 mr-2" />
@@ -159,7 +159,7 @@ export default function GalleryPage() {
                 <div className="space-y-2">
                   <Label htmlFor="sortOrder" className="text-base">Sort by Date</Label>
                   <Select
-                      onValueChange={(value: SortOrder) => setSortOrder(value)}
+                      onValueChange={(value: SortOrder) => { setSortOrder(value); setIsSheetOpen(false); }}
                       value={sortOrder}
                   >
                       <SelectTrigger id="sortOrder">
@@ -175,7 +175,7 @@ export default function GalleryPage() {
                 <div className="space-y-2">
                   <Label htmlFor="uploaderFilter" className="text-base">Filter by Uploader</Label>
                   <Select
-                      onValueChange={(value) => setSelectedUploader(value === "all" ? null : value)}
+                      onValueChange={(value) => { setSelectedUploader(value === "all" ? null : value); setIsSheetOpen(false); }}
                       value={selectedUploader || "all"}
                   >
                       <SelectTrigger id="uploaderFilter">
@@ -198,9 +198,6 @@ export default function GalleryPage() {
                       Clear Filter
                   </Button>
                 )}
-              </div>
-              <div className="mt-auto">
-                <Button className="w-full" onClick={() => { /* Close sheet */ }}>Apply Filters</Button>
               </div>
             </SheetContent>
           </Sheet>
