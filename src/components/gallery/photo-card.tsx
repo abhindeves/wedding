@@ -103,7 +103,7 @@ export default function PhotoCard({ photo, onLike, onDelete, userId }: PhotoCard
                     <Download className="h-5 w-5 text-muted-foreground group-hover:text-primary" />
                     <span className="sr-only">Download</span>
                 </Button>}
-                {(photo.uploader === userId || userId === "Admin") && (
+                {admin && (
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
                             <Button variant="ghost" size="icon" className="group">
