@@ -1,0 +1,36 @@
+
+> nextn@0.1.0 dev
+> next dev --turbopack -p 9002
+
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:9002
+   - Network:      http://100.64.121.33:9002
+
+ ✓ Starting...
+ ✓ Ready in 866ms
+ ○ Compiling / ...
+ ✓ Compiled / in 4.1s
+ GET / 200 in 4474ms
+ ○ Compiling /login ...
+ ⚠ Cross origin request detected from 9002--01993468-11c3-761b-bcff-32e3ba17138c.us-east-1-01.gitpod.dev to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ✓ Compiled /login in 965ms
+ GET /login 200 in 999ms
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 559ms
+ GET /favicon.ico 200 in 823ms
+ GET /favicon.ico?favicon.56766c03.ico 200 in 217ms
+ ○ Compiling /post-login-options ...
+ ✓ Compiled /post-login-options in 1053ms
+ GET /post-login-options 200 in 1214ms
+ GET / 200 in 32ms
+ ○ Compiling /api/schedule ...
+ ✓ Compiled /api/schedule in 534ms
+ ○ Compiling /gallery ...
+ ✓ Compiled /gallery in 1837ms
+ GET /gallery 200 in 1868ms
+ GET /api/schedule 200 in 6238ms
+ GET /api/schedule 200 in 307ms
+ ✓ Compiled /api/images in 467ms
+ GET /api/images 200 in 1083ms
+ GET /api/images 200 in 602ms
