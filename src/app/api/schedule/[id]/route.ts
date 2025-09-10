@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Event from '@/lib/models/event';
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   try {
     await dbConnect();
     const eventData = await request.json();
@@ -19,8 +19,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   try {
     await dbConnect();
     const deletedEvent = await Event.findByIdAndDelete(id);

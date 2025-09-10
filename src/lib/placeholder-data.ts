@@ -11,14 +11,14 @@ export type Photo = {
 };
 
 export const photos: Photo[] = [
-  { id: '1', url: 'https://placehold.co/600x800.png', uploader: 'Aunt Carol', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 15, uploadedAt: new Date('2024-07-20T10:00:00Z'), eventTag: 'Wedding', aiHint: 'wedding couple' },
-  { id: '2', url: 'https://placehold.co/800x600.png', uploader: 'Cousin Mike', likes: 25, uploadedAt: new Date('2024-07-20T11:30:00Z'), eventTag: 'Wedding', aiHint: 'wedding ceremony' },
-  { id: '3', url: 'https://placehold.co/600x900.png', uploader: 'Jane Smith', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 8, uploadedAt: new Date('2024-07-19T18:00:00Z'), eventTag: 'Mehendi', aiHint: 'henna hands' },
-  { id: '4', url: 'https://placehold.co/700x500.png', uploader: 'John Doe', likes: 42, uploadedAt: new Date('2024-07-20T14:00:00Z'), eventTag: 'Reception', aiHint: 'wedding party' },
-  { id: '5', url: 'https://placehold.co/600x600.png', uploader: 'Aunt Carol', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 3, uploadedAt: new Date('2024-07-19T10:00:00Z'), eventTag: 'Haldi', aiHint: 'turmeric ceremony' },
-  { id: '6', url: 'https://placehold.co/800x800.png', uploader: 'Best Man Bob', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 18, uploadedAt: new Date('2024-07-20T15:15:00Z'), eventTag: 'Reception', aiHint: 'wedding dance' },
-  { id: '7', url: 'https://placehold.co/1000x600.png', uploader: 'Jane Smith', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 9, uploadedAt: new Date('2024-07-20T12:00:00Z'), eventTag: 'Wedding', aiHint: 'bride groom' },
-  { id: '8', url: 'https://placehold.co/600x1000.png', uploader: 'Cousin Mike', likes: 33, uploadedAt: new Date('2024-07-20T16:00:00Z'), eventTag: 'Reception', aiHint: 'wedding cake' },
+  { _id: '1', url: 'https://placehold.co/600x800.png', uploader: 'Aunt Carol', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 15, likedBy: [], uploadedAt: new Date('2024-07-20T10:00:00Z'), eventTag: 'Wedding', aiHint: 'wedding couple' },
+  { _id: '2', url: 'https://placehold.co/800x600.png', uploader: 'Cousin Mike', likes: 25, likedBy: [], uploadedAt: new Date('2024-07-20T11:30:00Z'), eventTag: 'Wedding', aiHint: 'wedding ceremony' },
+  { _id: '3', url: 'https://placehold.co/600x900.png', uploader: 'Jane Smith', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 8, likedBy: [], uploadedAt: new Date('2024-07-19T18:00:00Z'), eventTag: 'Mehendi', aiHint: 'henna hands' },
+  { _id: '4', url: 'https://placehold.co/700x500.png', uploader: 'John Doe', likes: 42, likedBy: [], uploadedAt: new Date('2024-07-20T14:00:00Z'), eventTag: 'Reception', aiHint: 'wedding party' },
+  { _id: '5', url: 'https://placehold.co/600x600.png', uploader: 'Aunt Carol', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 3, likedBy: [], uploadedAt: new Date('2024-07-19T10:00:00Z'), eventTag: 'Haldi', aiHint: 'turmeric ceremony' },
+  { _id: '6', url: 'https://placehold.co/800x800.png', uploader: 'Best Man Bob', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 18, likedBy: [], uploadedAt: new Date('2024-07-20T15:15:00Z'), eventTag: 'Reception', aiHint: 'wedding dance' },
+  { _id: '7', url: 'https://placehold.co/1000x600.png', uploader: 'Jane Smith', uploaderAvatar: 'https://placehold.co/100x100.png', likes: 9, likedBy: [], uploadedAt: new Date('2024-07-20T12:00:00Z'), eventTag: 'Wedding', aiHint: 'bride groom' },
+  { _id: '8', url: 'https://placehold.co/600x1000.png', uploader: 'Cousin Mike', likes: 33, likedBy: [], uploadedAt: new Date('2024-07-20T16:00:00Z'), eventTag: 'Reception', aiHint: 'wedding cake' },
 ];
 
 export type ScheduleEvent = {

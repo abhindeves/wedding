@@ -5,9 +5,8 @@ import Photo from '@/lib/models/photo';
 import { storage } from '@/lib/firebase';
 import { ref, deleteObject } from 'firebase/storage';
 
-export async function DELETE(request: Request, context: { params: { id: string } }) {
-  const params = await context.params;
-  const { id } = params;
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const { userId } = await request.json(); // Assuming you send the user ID in the request body
 
   if (!userId) {

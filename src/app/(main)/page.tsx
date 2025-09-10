@@ -42,8 +42,8 @@ export default function HomePage() {
         <Image 
           src="https://firebasestorage.googleapis.com/v0/b/lions-74edb.firebasestorage.app/o/photos%2F20240818_115754.jpg?alt=media&token=9f0a72bb-be58-48f3-a0a0-7ebe0cb5a065"
           alt="Wedding banner"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="opacity-70"
           data-ai-hint="wedding banner"
         />

@@ -9,6 +9,14 @@ if (!MONGODB_URI) {
   );
 }
 
+// Extend global type to include mongoose
+declare global {
+  var mongoose: {
+    conn: any;
+    promise: Promise<any> | null;
+  };
+}
+
 let cached = global.mongoose;
 
 if (!cached) {
@@ -25,11 +33,12 @@ async function dbConnect() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
       return mongoose;
     });
   }
-  cached.conn = await cached.promise;
+  const connection = await cached.promise;
+  cached.conn = connection;
   return cached.conn;
 }
 
